@@ -13,7 +13,7 @@ function startGame(){
 function resetGame(){
     score = 0;
     clearInterval(move);
-    DOMSelectors.container.innerHTML = '<button onclick="whackMole()">Whack me!</button>';
+    DOMSelectors.container.innerHTML = '<button ="whackyMole()">Whack me!</button>';
     updateScore();
 }
 
@@ -32,12 +32,12 @@ function moveMole(){
 
     DOMSelectors.moleButton = document.querySelector('#game-container button');
     DOMSelectors.moleButton.onclick = function () {
-        whackMole();
+        whackyMole();
         moveMole();
     };
 }
 
-function whackMole() {
+function whackyMole() {
   score++;
   updateScore();
 }
