@@ -14,10 +14,15 @@ function resetGame(){
     score = 0;
     clearInterval(move);
     DOMSelectors.container.innerHTML = '<button ="whackyMole()">Whack me!</button>';
+  //  DOMSelectors.container.innerHTML = '<button id="mole-button">Whack me!</button>';
     updateScore();
 }
 
 function moveMole(){
+   /// const elementToMove = document.querySelector('.game-container button');
+    //const newParentElement = document.querySelector('.new-parent-element');
+    //newParentElement.appendChild(elementToMove);
+ /*   DOMSelectors.moleButton = document.querySelector('#game-container button');
     const containerWidth = DOMSelectors.container.clientWidth;
     const containerHeight = DOMSelectors.container.clientHeight;
 
@@ -30,12 +35,14 @@ function moveMole(){
     DOMSelectors.moleButton.style.left = randomX + 'px';
     DOMSelectors.moleButton.style.top = randomY + 'px';
 
-    DOMSelectors.moleButton = document.querySelector('#game-container button');
+
     DOMSelectors.moleButton.onclick = function () {
-        whackyMole();
+     whackyMole();
         moveMole();
+        */
     };
-}
+
+// }
 
 function whackyMole() {
   score++;
