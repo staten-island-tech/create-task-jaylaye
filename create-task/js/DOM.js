@@ -1,5 +1,5 @@
 const DOMSelectors = {
-container: document.getElementById('game-container'),
-moleButton: document.querySelector('#game-container button'),
+    holeContainer: document.querySelector('.hole-container'),
+    scoreDisplay: document.getElementById('score-display'),
 };
 export {DOMSelectors};

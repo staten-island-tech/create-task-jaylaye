@@ -1,63 +1,66 @@
 import { DOMSelectors } from "./DOM";
 
-document.getElementById('start-button').addEventListener('click', startGame);
 
 let score = 0;
-let move;
+let moleHoles = [];
+let moveInterval;
+
+document.getElementById('start-button').addEventListener('click', startGame);
+
+
+function updateScore() {
+    const scoreDisplay = DOMSelectors.scoreDisplay;
+    scoreDisplay.textContent = 'Score: ' + score;
+}
 
 function startGame(){
     resetGame();
-    move = setInterval(moveMole, 1000);
+    createMoleHoles(5);
+    moveInterval = setInterval(moveHole, 1000); 
 }
 
 function resetGame(){
     score = 0;
-    clearInterval(move);
-    DOMSelectors.container.innerHTML = '<button ="whackyMole()">Whack me!</button>';
-  //  DOMSelectors.container.innerHTML = '<button id="mole-button">Whack me!</button>';
-    updateScore();
+    clearInterval(moveInterval);
+    DOMSelectors.scoreDisplay.textContent = '';
+    moleHoles = [];
+    DOMSelectors.holeContainer.innerHTML = '';
 }
 
-function moveMole(){
-   /// const elementToMove = document.querySelector('.game-container button');
-    //const newParentElement = document.querySelector('.new-parent-element');
-    //newParentElement.appendChild(elementToMove);
- /*   DOMSelectors.moleButton = document.querySelector('#game-container button');
-    const containerWidth = DOMSelectors.container.clientWidth;
-    const containerHeight = DOMSelectors.container.clientHeight;
-
-    const maxX = containerWidth - DOMSelectors.moleButton.clientWidth;
-    const maxY = containerHeight - DOMSelectors.moleButton.clientHeight;
-
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
-
-    DOMSelectors.moleButton.style.left = randomX + 'px';
-    DOMSelectors.moleButton.style.top = randomY + 'px';
-
-
-    DOMSelectors.moleButton.onclick = function () {
-     whackyMole();
-        moveMole();
-        */
-    };
-
-// }
-
-function whackyMole() {
-  score++;
-  updateScore();
-}
-
-function updateScore() {
-    const scoreElement = document.getElementById('score-display');
-    if (!scoreElement) {
-        DOMSelectors.container.innerHTML += '<p id="score-display">Score: ' + score + '</p>';
-    } else {
-        scoreElement.textContent = 'Score: ' + score;
+function createMoleHoles(count) {
+    for (let i = 0; i < count; i++) {
+        const moleHole = document.createElement('div');
+        moleHole.className = 'hole';
+        moleHole.id = 'hole-' + i;
+        moleHole.onclick = () => whackMole(moleHole);
+        moleHoles.push(moleHole);
+        DOMSelectors.holeContainer.appendChild(moleHole);
     }
 }
-//grid of potential moles
-//get it to appear in random spots
-//get it to wait a few seconds
+
+function moveHole() {
+    resetMoles();
+    const randomIndex = Math.floor(Math.random() * moleHoles.length);
+    const moleHole = moleHoles[randomIndex];
+    moleHole.classList.add('mole');
+}
+
+function resetMoles() {
+    moleHoles.forEach(moleHole => {
+        moleHole.classList.remove('mole');
+        moleHole.onclick = () => whackMole(moleHole);
+    });
+}
+
+function whackMole(clickedMoleHole) {
+    if (clickedMoleHole.classList.contains('mole')) {
+        clickedMoleHole.classList.remove('mole');
+        score++;
+        updateScore();
+    }
+}
+
+
+
+
 
