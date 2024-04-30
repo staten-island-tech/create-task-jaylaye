@@ -32,7 +32,19 @@ function createMoleHoles(count) {
         const moleHole = document.createElement('div');
         moleHole.className = 'hole';
         moleHole.id = 'hole-' + i;
-        moleHole.onclick = () => whackMole(moleHole);
+
+       
+        const shouldHaveMole = Math.random() < 0.5; 
+        if (shouldHaveMole) {
+            moleHole.classList.add('mole');
+        }
+
+        moleHole.onclick = (function (hole) {
+            return function () {
+                whackMole(hole);
+            };
+        })(moleHole);
+
         moleHoles.push(moleHole);
         DOMSelectors.holeContainer.appendChild(moleHole);
     }
