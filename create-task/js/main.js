@@ -1,4 +1,7 @@
-import { DOMSelectors } from "./DOM";
+const DOMSelectors = {
+    holeContainer: document.querySelector('.hole-container'),
+    scoreDisplay: document.getElementById('score-display'),
+};
 
 
 let score = 0;
@@ -16,6 +19,7 @@ function updateScore() {
 function startGame(){
     resetGame();
     createMoleHoles(5);
+    clearInterval(moveInterval);
     moveInterval = setInterval(moveHole, 1000); 
 }
 
@@ -32,9 +36,7 @@ function createMoleHoles(count) {
         const moleHole = document.createElement('div');
         moleHole.className = 'hole';
         moleHole.id = 'hole-' + i;
-
-       
-        const shouldHaveMole = Math.random() < 0.5; 
+        const shouldHaveMole = i === 0;
         if (shouldHaveMole) {
             moleHole.classList.add('mole');
         }
