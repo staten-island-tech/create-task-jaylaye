@@ -51,12 +51,11 @@ function createMoleHoles(count) {
 }
 
 function moveHole() {
-    resetMoles();
+    resetMoles(); 
     const randomIndex = Math.floor(Math.random() * moleHoles.length);
     const moleHole = moleHoles[randomIndex];
-    moleHole.classList.add('mole');
+    moleHole.classList.add('mole'); 
 }
-
 function resetMoles() {
     moleHoles.forEach(moleHole => {
         moleHole.classList.remove('mole');
